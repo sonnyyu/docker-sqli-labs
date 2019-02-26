@@ -1,1 +1,12 @@
-
+version: '3'
+services:
+ web:
+  build:
+      context: ./sqli-labs
+      dockerfile: Dockerfile
+  ports:
+   - "80:80"
+  volumes:
+       - sqli-labs:/var/log/apache2
+volumes:
+    sqli-labs: {}
