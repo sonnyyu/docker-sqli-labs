@@ -24,7 +24,7 @@ services:
     build:
       context: ./sqli-labs
       dockerfile: Dockerfile
-      image: sonnyyu/sqli-labs
+#      image: sonnyyu/sqli-labs
     ports:
       - "80:80"
     volumes:
@@ -33,7 +33,7 @@ services:
     build:
       context: ./sqlmap
       dockerfile: Dockerfile
-      image: sonnyyu/sqlmap
+#      image: sonnyyu/sqlmap
 volumes:
   sqli-labs: {}
   opt_splunk_etc:
