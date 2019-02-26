@@ -28,6 +28,10 @@ services:
       - "80:80"
     volumes:
       - sqli-labs:/var/log/apache2
+  sqlmap:
+    build:
+      context: ./sqlmap
+      dockerfile: Dockerfile    
 volumes:
   sqli-labs: {}
   opt_splunk_etc:
