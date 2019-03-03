@@ -18,18 +18,16 @@ http://10.145.88.192:8000
 
 admin/password
 
+docker-compose stop
+
 docker-compose down
 
-docker-compose up -d
-
 docker container prune -f
-
 docker image prune -a -f
-
 docker volume prune -f
-
 docker network prune -f
-
 docker system prune -f
 
 sudo rm -rf /var/lib/docker/volumes/*
+
+docker-compose up -d

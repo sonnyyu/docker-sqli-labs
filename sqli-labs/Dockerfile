@@ -1,7 +1,5 @@
 FROM tutum/lamp:latest
-
 MAINTAINER Sonny Yu <sonnyyuirm@gmail.com>
-
 RUN cd /tmp/ &&\
     git clone https://github.com/Audi-1/sqli-labs.git && \
     cd sqli-labs && \
