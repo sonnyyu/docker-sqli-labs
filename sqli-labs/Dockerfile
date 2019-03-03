@@ -10,5 +10,6 @@ RUN cd /tmp/ &&\
     mv -f /tmp/sqli-labs/* /app/ && \
     chown www-data:www-data -R /app && \
     rm -rf /tmp/sqli-labs
-
+RUN sudo echo "America/Los_Angeles" > /etc/timezone
+RUN sudo dpkg-reconfigure -f noninteractive tzdata
 EXPOSE 80 3306

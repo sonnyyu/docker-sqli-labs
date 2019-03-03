@@ -6,12 +6,14 @@ services:
     build:
       context: ./splunk
       dockerfile: Dockerfile
-    container_name: splunk 
+    container_name: splunk
     environment:
       - SPLUNK_ENABLE_LISTEN=9997
       - SPLUNK_START_ARGS=--accept-license --no-prompt --answer-yes
       - SPLUNK_USERNAME=admin
       - SPLUNK_PASSWORD=password
+      - SET_CONTAINER_TIMEZONE=true
+      - CONTAINER_TIMEZONE=America/Los_Angeles
     restart: always
     volumes:
       - opt_splunk_etc:/opt/splunk/etc
@@ -20,26 +22,32 @@ services:
       - sqli-labs-mysql:/var/log/mysql
     ports:
       - "8000:8000"
-      - "9997:9997"
-      - "8088:8088"
-      - "1514:1514"
-      - "514:514/udp"
+      #- "9997:9997"
+      #- "8088:8088"
+      #- "1514:1514"
+      #- "514:514/udp"
     restart: always
   sqli-labs:
     build:
       context: ./sqli-labs
       dockerfile: Dockerfile
     container_name: sqli-labs
+    environment:
+      - SET_CONTAINER_TIMEZONE=true
+      - CONTAINER_TIMEZONE=America/Los_Angeles
     ports:
       - "80:80"
     volumes:
       - sqli-labs-apache2:/var/log/apache2
-      - sqli-labs-mysql:/var/log/mysql
+      - sqli-labs-mysql:/var/log/mysql 
   sqlmap:
     build:
       context: ./sqlmap
       dockerfile: Dockerfile
     container_name: sqlmap
+    environment:
+      - SET_CONTAINER_TIMEZONE=true
+      - CONTAINER_TIMEZONE=America/Los_Angeles
 volumes:
   sqli-labs-apache2: {}
   sqli-labs-mysql: {}

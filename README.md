@@ -1,7 +1,10 @@
+git clone https://github.com/sonnyyu/docker-sqli-labs
+
+cd docker-sqli-labs
 
 docker-compose up --build
 
-docker exec -it sqli-labs /usr/bin/mysql -uroot -p -e "SET global log_output = 'FILE'; SET global general_log_file='/var/log/mysql/all.log'; SET global general_log = ON;"
+docker exec -it sqli-labs /usr/bin/mysql -uroot -e "SET global log_output = 'FILE'; SET global general_log_file='/var/log/mysql/all.log'; SET global general_log = ON;"
 
 curl http://10.145.88.192/sql-connections/setup-db.php
 
@@ -11,7 +14,13 @@ docker exec -it splunk /bin/chmod 777 -R /var/log/mysql
 
 docker exec -it splunk /bin/chmod 777 -R /var/log/apache2
 
+http://10.145.88.192:8000
+
+admin/password
+
 docker-compose down
+
+docker-compose up -d
 
 docker container prune -f
 
@@ -21,6 +30,6 @@ docker volume prune -f
 
 docker network prune -f
 
-docker system prune -f 
+docker system prune -f
 
-
+sudo rm -rf /var/lib/docker/volumes/*
