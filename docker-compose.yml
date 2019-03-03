@@ -12,8 +12,6 @@ services:
       - SPLUNK_START_ARGS=--accept-license --no-prompt --answer-yes
       - SPLUNK_USERNAME=admin
       - SPLUNK_PASSWORD=password
-      - SET_CONTAINER_TIMEZONE=true
-      - CONTAINER_TIMEZONE=America/Los_Angeles
     restart: always
     volumes:
       - opt_splunk_etc:/opt/splunk/etc
@@ -32,9 +30,6 @@ services:
       context: ./sqli-labs
       dockerfile: Dockerfile
     container_name: sqli-labs
-    environment:
-      - SET_CONTAINER_TIMEZONE=true
-      - CONTAINER_TIMEZONE=America/Los_Angeles
     ports:
       - "80:80"
     volumes:
@@ -45,9 +40,6 @@ services:
       context: ./sqlmap
       dockerfile: Dockerfile
     container_name: sqlmap
-    environment:
-      - SET_CONTAINER_TIMEZONE=true
-      - CONTAINER_TIMEZONE=America/Los_Angeles
 volumes:
   sqli-labs-apache2: {}
   sqli-labs-mysql: {}
