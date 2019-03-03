@@ -2,7 +2,11 @@ version: '3'
 services:
   splunk:
     hostname: splunkenterprise
-    image: splunk/splunk:latest
+    #image: splunk/splunk:latest
+    build:
+      context: ./splunk
+      dockerfile: Dockerfile
+    container_name: splunk 
     environment:
       - SPLUNK_ENABLE_LISTEN=9997
       - SPLUNK_START_ARGS=--accept-license --no-prompt --answer-yes
@@ -12,7 +16,8 @@ services:
     volumes:
       - opt_splunk_etc:/opt/splunk/etc
       - opt_splunk_var:/opt/splunk/var
-      - sqli-labs:/var/log
+      - sqli-labs-apache2:/var/log/apache2
+      - sqli-labs-mysql:/var/log/mysql
     ports:
       - "8000:8000"
       - "9997:9997"
@@ -24,17 +29,19 @@ services:
     build:
       context: ./sqli-labs
       dockerfile: Dockerfile
-#      image: sonnyyu/sqli-labs
+    container_name: sqli-labs
     ports:
       - "80:80"
     volumes:
-      - sqli-labs:/var/log/apache2
+      - sqli-labs-apache2:/var/log/apache2
+      - sqli-labs-mysql:/var/log/mysql
   sqlmap:
     build:
       context: ./sqlmap
       dockerfile: Dockerfile
-#      image: sonnyyu/sqlmap
+    container_name: sqlmap
 volumes:
-  sqli-labs: {}
+  sqli-labs-apache2: {}
+  sqli-labs-mysql: {}
   opt_splunk_etc:
   opt_splunk_var:
